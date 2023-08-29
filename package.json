@@ -1,0 +1,53 @@
+{
+  "name": "micro-core-backend",
+  "version": "1.0.1",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:dev": "NODE_ENV=development nodemon src/index.js",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "migrate": "node -r dotenv-flow/config ./node_modules/knex/bin/cli.js migrate:latest --knexfile ./src/models/knexfile.js",
+    "migrate:make": "node -r dotenv-flow/config ./node_modules/knex/bin/cli.js migrate:make --knexfile ./src/models/knexfile.js",
+    "migrate:up": "node -r dotenv-flow/config ./node_modules/knex/bin/cli.js migrate:up --knexfile ./src/models/knexfile.js",
+    "migrate:down": "node -r dotenv-flow/config ./node_modules/knex/bin/cli.js migrate:down --knexfile ./src/models/knexfile.js",
+    "migrate:up:dev": "NODE_ENV=development npm run migrate:up",
+    "migrate:up:prod": "NODE_ENV=production npm run migrate:up",
+    "migrate:down:dev": "NODE_ENV=development npm run migrate:down",
+    "migrate:down:prod": "NODE_ENV=production npm run migrate:down",
+    "migrate:make:dev": "NODE_ENV=development npm run migrate:make",
+    "migrate:dev": "NODE_ENV=development npm run migrate",
+    "migrate:prod": "NODE_ENV=production npm run migrate",
+    "deploy:dev": "NODE_ENV=development GCR_PROJECT_ID=$npm_package_config_PROJECT_ID_DEV GCR_IMAGE=$npm_package_config_IMAGE_DEV GCR_SERVICE=$npm_package_config_SERVICE_DEV GCR_REGION=$npm_package_config_REGION_DEV ./deploy.sh",
+    "deploy:prod": "NODE_ENV=production GCR_PROJECT_ID=$npm_package_config_PROJECT_ID_PROD GCR_IMAGE=$npm_package_config_IMAGE_PROD GCR_SERVICE=$npm_package_config_SERVICE_PROD GCR_REGION=$npm_package_config_REGION_PROD ./deploy.sh"
+  },
+  "config": {
+    "PROJECT_ID_DEV": "gepety",
+    "IMAGE_DEV": "micro-core-backend-dev-image",
+    "SERVICE_DEV": "micro-core-backend-dev",
+    "REGION_DEV": "us-east5",
+    "PROJECT_ID_PROD": "gepety",
+    "IMAGE_PROD": "micro-core-backend-image",
+    "SERVICE_PROD": "micro-core-backend",
+    "REGION_PROD": "us-east5"
+  },
+  "dependencies": {
+    "@lsm/jwt-policies": "1.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "generate-password": "^1.4.0",
+    "http-errors": "^1.8.0",
+    "joi": "^17.6.2",
+    "knex": "^2.3.0",
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.6",
+    "nodemon": "^2.0.20",
+    "objection": "^3.0.1",
+    "query-string": "^6.13.1"
+  },
+  "devDependencies": {
+    "dotenv-flow": "^3.2.0",
+    "standard": "^14.3.4"
+  }
+}
